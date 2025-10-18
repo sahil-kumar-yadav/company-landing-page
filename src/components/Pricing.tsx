@@ -16,52 +16,35 @@ export default function Pricing() {
       name: "Starter",
       price: "$9",
       description: "Perfect for freelancers and individuals.",
-      features: [
-        "1 Project",
-        "Basic Analytics",
-        "Email Support",
-        "Community Access",
-      ],
+      features: ["1 Project", "Basic Analytics", "Email Support", "Community Access"],
     },
     {
       name: "Pro",
       price: "$29",
       description: "Ideal for small teams and growing businesses.",
-      features: [
-        "10 Projects",
-        "Advanced Analytics",
-        "Priority Support",
-        "Team Collaboration",
-      ],
+      features: ["10 Projects", "Advanced Analytics", "Priority Support", "Team Collaboration"],
       popular: true,
     },
     {
       name: "Enterprise",
       price: "$99",
       description: "For large organizations with custom needs.",
-      features: [
-        "Unlimited Projects",
-        "Dedicated Account Manager",
-        "Custom Integrations",
-        "24/7 Premium Support",
-      ],
+      features: ["Unlimited Projects", "Dedicated Account Manager", "Custom Integrations", "24/7 Premium Support"],
     },
   ];
 
   return (
-    <section id="pricing" className="relative py-20 bg-slate-50 dark:bg-slate-900 overflow-hidden">
-      {/* subtle background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-100/40 via-white/20 to-transparent dark:from-indigo-900/20 dark:via-slate-800/30" />
+    <section id="pricing" className="relative py-20 overflow-hidden" style={{ background: "transparent" }}>
+      {/* subtle modern gradient */}
+      <div className="absolute inset-0" style={{ background: "var(--bg-gradient)", opacity: 0.25, pointerEvents: "none" }} />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">
+          <h2 style={{ color: "var(--text)" }} className="text-3xl sm:text-4xl font-extrabold">
             Simple, Transparent Pricing
           </h2>
-          <p className="mt-2 text-slate-500 dark:text-slate-400">
-            Choose a plan that fits your needs — upgrade anytime.
-          </p>
+          <p className="mt-2 muted">Choose a plan that fits your needs — upgrade anytime.</p>
         </div>
 
         {/* Pricing Cards */}
@@ -69,50 +52,57 @@ export default function Pricing() {
           {plans.map((plan) => (
             <div
               key={plan.name}
-              className={`relative rounded-3xl p-8 border backdrop-blur-xl bg-white/40 dark:bg-slate-800/30 transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg ${
-                plan.popular
-                  ? "border-indigo-500/50 shadow-indigo-100 dark:shadow-indigo-900/30"
-                  : "border-slate-200/30"
-              }`}
+              className="relative rounded-3xl p-8 transition-transform duration-300 hover:-translate-y-1"
+              style={{
+                background: "var(--card)",
+                border: plan.popular ? `1px solid rgba(124,92,255,0.18)` : "1px solid rgba(255,255,255,0.04)",
+                boxShadow: plan.popular ? "0 12px 40px rgba(124,92,255,0.08)" : "var(--shadow)",
+                backdropFilter: "blur(12px)",
+              }}
             >
               {/* “Most Popular” Badge */}
               {plan.popular && (
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-indigo-600 text-white text-sm px-3 py-1 rounded-full shadow-md">
+                <span
+                  className="absolute -top-3 left-1/2 -translate-x-1/2 text-sm px-3 py-1 rounded-full"
+                  style={{ background: "linear-gradient(90deg,var(--accent),var(--accent-2))", color: "#fff", boxShadow: "0 6px 20px rgba(99,102,241,0.12)" }}
+                >
                   Most Popular
                 </span>
               )}
 
-              <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
+              <h3 style={{ color: "var(--text)" }} className="text-2xl font-bold">
                 {plan.name}
               </h3>
-              <p className="mt-2 text-slate-600 dark:text-slate-300">
+              <p className="mt-2 muted" style={{ color: "var(--muted)" }}>
                 {plan.description}
               </p>
 
               <div className="mt-6">
-                <span className="text-5xl font-extrabold text-slate-900 dark:text-white">
+                <span className="text-5xl font-extrabold" style={{ color: "var(--text)" }}>
                   {plan.price}
                 </span>
-                <span className="text-slate-500 dark:text-slate-400">/month</span>
+                <span className="ml-2 muted">/month</span>
               </div>
 
               <ul className="mt-8 space-y-3">
                 {plan.features.map((feature, i) => (
-                  <li key={i} className="flex items-center gap-3 text-slate-700 dark:text-slate-300">
-                    <Check className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
-                    <span>{feature}</span>
+                  <li key={i} className="flex items-center gap-3" style={{ color: "var(--text)" }}>
+                    <Check style={{ color: "var(--accent)" }} className="w-5 h-5" />
+                    <span className="muted" style={{ color: "var(--text)" }}>{feature}</span>
                   </li>
                 ))}
               </ul>
 
               <button
-                className={`mt-10 w-full rounded-xl py-3 font-semibold transition ${
+                className="mt-10 w-full rounded-xl py-3 font-semibold transition"
+                style={
                   plan.popular
-                    ? "bg-indigo-600 text-white hover:bg-indigo-700"
-                    : "bg-white/60 dark:bg-slate-700/50 text-slate-800 dark:text-white hover:bg-slate-100/70 dark:hover:bg-slate-700"
-                }`}
+                    ? { background: "linear-gradient(90deg,var(--accent),var(--accent-2))", color: "#fff" }
+                    : { background: "transparent", color: "var(--text)", border: "1px solid rgba(255,255,255,0.06)" }
+                }
+                aria-label={`Select ${plan.name} plan`}
               >
-                Get Started
+                {plan.popular ? "Get Started" : "Choose plan"}
               </button>
             </div>
           ))}

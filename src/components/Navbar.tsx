@@ -2,16 +2,16 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, Box } from "lucide-react";
+import { Menu, X, Box, SunMoon } from "lucide-react";
+import { useTheme } from "@/context/ThemeProvider";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
-    const handler = () => {
-      setScrolled(window.scrollY > 20);
-    };
+    const handler = () => setScrolled(window.scrollY > 20);
     handler();
     window.addEventListener("scroll", handler);
     return () => window.removeEventListener("scroll", handler);
@@ -19,20 +19,24 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed left-0 right-0 z-50 transition-shadow backdrop-blur-sm ${
-        scrolled ? "shadow-md" : ""
-      }`}
+      className={`fixed left-0 right-0 z-50 transition-shadow ${scrolled ? "shadow-md" : ""}`}
+      style={{ backdropFilter: "blur(8px)" }}
     >
-      <nav className="bg-white/90 dark:bg-slate-900/80">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav
+        className="glass"
+        style={{
+          background: "var(--card)",
+          borderRadius: 0,
+          borderBottom: "1px solid rgba(255,255,255,0.04)",
+        }}
+      >
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Brand */}
             <div className="flex items-center">
-              <Link href="/" className="flex items-center gap-2">
-                <Box className="text-primary-600 dark:text-primary-400" />
-                <span className="font-bold text-primary-600 dark:text-primary-400">
-                  StartUp
-                </span>
+              <Link href="/" className="flex items-center gap-3">
+                <Box style={{ color: "var(--accent)" }} />
+                <span style={{ fontWeight: 700, color: "var(--text)" }}>StartUp</span>
               </Link>
             </div>
 
@@ -40,38 +44,64 @@ export default function Navbar() {
             <div className="hidden md:flex items-center space-x-6">
               <a
                 href="#features"
-                className="text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition"
+                className="transition"
+                style={{ color: "var(--text)" }}
               >
                 Features
               </a>
               <a
                 href="#pricing"
-                className="text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition"
+                className="transition"
+                style={{ color: "var(--text)" }}
               >
                 Pricing
               </a>
               <a
                 href="#testimonials"
-                className="text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition"
+                className="transition"
+                style={{ color: "var(--text)" }}
               >
                 Testimonials
               </a>
+
               <a
                 href="#contact"
-                className="inline-flex items-center px-4 py-2 rounded-md bg-primary-600 dark:bg-primary-500 text-white hover:opacity-95 transition"
+                className="inline-flex items-center px-4 py-2 rounded-md btn-accent"
+                style={{ textDecoration: "none" }}
               >
                 Get Started
               </a>
+
+              <button
+                onClick={toggleTheme}
+                aria-label="Toggle theme"
+                title={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
+                className="p-2 rounded-md hover:opacity-95 transition"
+                style={{ background: "transparent", border: "none", color: "var(--text)" }}
+              >
+                <SunMoon />
+              </button>
             </div>
 
             {/* Mobile menu button */}
-            <div className="md:hidden flex items-center">
+            <div className="md:hidden flex items-center gap-2">
+              <button
+                aria-label="Toggle theme"
+                onClick={toggleTheme}
+                className="p-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+                style={{ color: "var(--text)" }}
+                title={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
+              >
+                <SunMoon />
+              </button>
+
               <button
                 aria-label="Toggle menu"
                 onClick={() => setOpen(!open)}
                 className="p-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+                style={{ color: "var(--text)" }}
               >
-                {open ? <X className="text-slate-800 dark:text-white" /> : <Menu className="text-slate-800 dark:text-white" />}
+                {open ? <X /> : <Menu />}
               </button>
             </div>
           </div>
@@ -79,33 +109,37 @@ export default function Navbar() {
 
         {/* Mobile menu panel */}
         {open && (
-          <div className="md:hidden border-t border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900">
+          <div className="md:hidden border-t" style={{ borderColor: "rgba(255,255,255,0.04)", background: "var(--card)" }}>
             <div className="px-4 pt-4 pb-6 space-y-3">
               <a
                 href="#features"
                 onClick={() => setOpen(false)}
-                className="block text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition"
+                className="block transition"
+                style={{ color: "var(--text)" }}
               >
                 Features
               </a>
               <a
                 href="#pricing"
                 onClick={() => setOpen(false)}
-                className="block text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition"
+                className="block transition"
+                style={{ color: "var(--text)" }}
               >
                 Pricing
               </a>
               <a
                 href="#testimonials"
                 onClick={() => setOpen(false)}
-                className="block text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition"
+                className="block transition"
+                style={{ color: "var(--text)" }}
               >
                 Testimonials
               </a>
               <a
                 href="#contact"
                 onClick={() => setOpen(false)}
-                className="block mt-2 px-4 py-2 rounded-md bg-primary-600 dark:bg-primary-500 text-white text-center hover:opacity-95 transition"
+                className="block mt-2 px-4 py-2 rounded-md btn-accent text-center"
+                style={{ textDecoration: "none" }}
               >
                 Get Started
               </a>

@@ -1,46 +1,60 @@
+"use client";
 import Image from "next/image";
+import { useTheme } from "@/context/ThemeProvider";
 
 export default function Hero() {
+  const { theme, toggleTheme } = useTheme();
+
   return (
-    <section className="hero-gradient text-white py-24 min-h-[70vh]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-          {/* Text Content */}
-          <div className="text-center lg:text-left">
-            <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight mb-4 text-white">
-              Transform Your Business with Our Solution
-            </h1>
-            <p className="text-lg sm:text-xl text-white/80 mb-6">
+    <section className="py-24 min-h-[72vh]">
+      <div className="container mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="space-y-6">
+            <div className="flex items-center justify-between">
+              <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight" style={{ color: "var(--text)" }}>
+                Transform Your Business with Our Solution
+              </h1>
+              <button
+                suppressHydrationWarning
+                aria-label="Toggle theme"
+                title={`Switch to ${theme === "dark" ? "light" : "dark"}`}
+                onClick={toggleTheme}
+                className="btn-accent"
+                style={{ fontSize: 14 }}
+              >
+                {theme === "dark" ? "🌞 Light" : "🌙 Dark"}
+              </button>
+            </div>
+
+            <p className="text-lg" style={{ color: "var(--muted)" }}>
               Empower your business with cutting-edge tools and insights. Start your journey today.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
-              <a
-                href="#contact"
-                className="inline-flex items-center justify-center px-6 py-3 rounded-md bg-white text-black font-semibold shadow-sm hover:bg-gray-100 transition-colors"
-              >
+            <div className="flex gap-4">
+              <a href="#contact" className="btn-accent inline-flex items-center justify-center">
                 Get Started
               </a>
               <a
                 href="#features"
-                className="inline-flex items-center justify-center px-6 py-3 rounded-md border border-white/30 text-white hover:bg-white/10 transition-colors"
+                className="inline-flex items-center justify-center px-6 py-3 rounded-xl border"
+                style={{
+                  borderColor: "rgba(255,255,255,0.06)",
+                  color: "var(--text)",
+                  background: "transparent",
+                }}
               >
                 Learn More
               </a>
             </div>
           </div>
 
-          {/* Hero Image */}
           <div className="w-full flex justify-center lg:justify-end">
-            <div className="rounded-2xl overflow-hidden shadow-2xl w-full max-w-md">
-              <img
-                src="https://cdn.pixabay.com/photo/2020/03/09/15/59/scifi-4916165_1280.jpg"
-                alt="Hero image"
-                className="w-full h-auto object-cover block"
-              />
+            <div className="glass w-full max-w-md rounded-3xl overflow-hidden border border-white/6">
+              <Image src="/hero-image.png" alt="Hero" width={600} height={600} className="object-cover w-full h-auto" />
             </div>
           </div>
         </div>
+
       </div>
     </section>
   );
