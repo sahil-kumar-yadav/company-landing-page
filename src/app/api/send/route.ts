@@ -20,16 +20,24 @@ export async function POST(req: Request) {
         });
 
         if (error) {
-            console.log("error is",error)
+            console.log("error is", error)
             return NextResponse.json({ error }, { status: 500 });
         }
 
         return NextResponse.json({ success: true, message: "Message sent successfully!" });
     } catch (err: unknown) {
         console.error("❌ Resend Error full:", err);
-        console.error("❌ Resend Error message:", err?.message);
+
+        if (err instanceof Error) {
+            console.error("❌ Resend Error message:", err.message);
+            return NextResponse.json(
+                { error: err.message },
+                { status: 500 }
+            );
+        }
+
         return NextResponse.json(
-            { error: err?.message || "Failed to send email" },
+            { error: "Failed to send email" },
             { status: 500 }
         );
     }
