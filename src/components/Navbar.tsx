@@ -36,7 +36,7 @@ export default function Navbar() {
             <div className="flex items-center">
               <Link href="/" className="flex items-center gap-3">
                 <Box style={{ color: "var(--accent)" }} />
-                <span style={{ fontWeight: 700, color: "var(--text)" }}>StartUp</span>
+                <span style={{ fontWeight: 700, color: "var(--text)" }}>Thinkable XAI</span>
               </Link>
             </div>
 
@@ -47,7 +47,7 @@ export default function Navbar() {
                 className="transition"
                 style={{ color: "var(--text)" }}
               >
-                Features
+               Services
               </a>
               <a
                 href="#pricing"
