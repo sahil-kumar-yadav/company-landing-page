@@ -14,16 +14,6 @@ export default function Hero() {
               <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight" style={{ color: "var(--text)" }}>
                 Transform Your Business with Our Solution
               </h1>
-              <button
-                suppressHydrationWarning
-                aria-label="Toggle theme"
-                title={`Switch to ${theme === "dark" ? "light" : "dark"}`}
-                onClick={toggleTheme}
-                className="btn-accent"
-                style={{ fontSize: 14 }}
-              >
-                {theme === "dark" ? "🌞 Light" : "🌙 Dark"}
-              </button>
             </div>
 
             <p className="text-lg" style={{ color: "var(--muted)" }}>
