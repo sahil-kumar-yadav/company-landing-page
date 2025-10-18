@@ -25,7 +25,7 @@ export async function POST(req: Request) {
         }
 
         return NextResponse.json({ success: true, message: "Message sent successfully!" });
-    } catch (err: any) {
+    } catch (err: unknown) {
         console.error("❌ Resend Error full:", err);
         console.error("❌ Resend Error message:", err?.message);
         return NextResponse.json(

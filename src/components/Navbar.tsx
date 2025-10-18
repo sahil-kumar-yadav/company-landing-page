@@ -36,7 +36,7 @@ export default function Navbar() {
             <div className="flex items-center">
               <Link href="/" className="flex items-center gap-3">
                 <Box style={{ color: "var(--accent)" }} />
-                <span style={{ fontWeight: 700, color: "var(--text)" }}>Thinkable XAI</span>
+                <span style={{ fontWeight: 700, color: "var(--text)" }}>Startup</span>
               </Link>
             </div>
 

@@ -1,9 +1,7 @@
 "use client";
 import Image from "next/image";
-import { useTheme } from "@/context/ThemeProvider";
 
 export default function Hero() {
-  const { theme, toggleTheme } = useTheme();
 
   return (
     <section className="py-24 min-h-[72vh]">

@@ -46,7 +46,7 @@ export const EmailTemplate = ({ name, email, message }: EmailTemplateProps) => (
 
         <Section style={section}>
           <Text style={footerText}>
-            This email was generated automatically from your website's contact form.
+            This email was generated automatically from your websites contact form.
           </Text>
         </Section>
       </Container>
