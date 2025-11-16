@@ -1,4 +1,6 @@
 # Company Landing Page
+<img width="942" height="500" alt="image" src="https://github.com/user-attachments/assets/fe77b172-a225-4d8b-abe9-7370db82a425" />
+
 
 A sleek, responsive landing page built with **Next.js** featuring the sections: `Hero`, `Features`, `Pricing`, `Testimonials`, `Contact`, and `Footer`.
 
